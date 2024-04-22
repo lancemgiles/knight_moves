@@ -2,6 +2,17 @@
 
 # build a function that shows the shortest possible way to get from one square to another
 class Knight
+  POSSIBLE_MOVES = [
+    [1, 2],
+    [1, -2],
+    [-1, 2],
+    [-1, -2],
+    [2, 1],
+    [2, -1],
+    [-2, 1],
+    [-2, -1]
+  ].freeze
+
   attr_accessor :location, :destination, :board
 
   def initialize
@@ -16,12 +27,15 @@ class Knight
   def move(start, target)
     @location = locate(start)
     @destination = locate(target)
-    # the piece must move two spaces in one axis and one in another axis
-    # ex: [3, 3] can move to [1, 2], [4, 1], [2, 1], [5, 2], etc
   end
 
   def locate(coords)
-    Board.board[coords[0]][coords[1]]
+    @board[coords[0]][coords[1]]
+  end
+
+  def possible_moves(start)
+    # the piece must move two spaces in one axis and one in another axis
+    # ex: [3, 3] can move to [1, 2], [4, 1], [2, 1], [5, 2], etc
   end
 end
 
