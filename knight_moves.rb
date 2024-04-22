@@ -1,18 +1,31 @@
 # frozen_string_literal: true
 
-# chess board as a cartesean plane
-class Board
-  attr_accessor :board
+# build a function that shows the shortest possible way to get from one square to another
+class Knight
+  attr_accessor :location, :destination, :board
 
   def initialize
+    # chess board as a cartesean plane
     # each element of the board is a row
     # each element of the row array is a cell in that row
-    # so @board[0][0] is the top left corner, (0, 0)
+    # so @board[0][0] is the bottom left corner, (0, 0)
     @board = Array.new(8) { Array.new(8) }
+  end
+
+  # return an array representing coordinates for each stop
+  def move(start, target)
+    @location = locate(start)
+    @destination = locate(target)
+    # the piece must move two spaces in one axis and one in another axis
+    # ex: [3, 3] can move to [1, 2], [4, 1], [2, 1], [5, 2], etc
+  end
+
+  def locate(coords)
+    Board.board[coords[0]][coords[1]]
   end
 end
 
-# build a function that shows the shortest possible way to get from one square to another
-class KnightMoves
-  # return an array representing coordinates for each stop
-end
+game = Board.new
+knight = Knight.new
+knight.move([0, 0], [1, 2]) # expected output: [[0,0], [1,2]]
+knight.move([0, 0], [7, 7]) # => [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
