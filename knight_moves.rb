@@ -78,6 +78,11 @@ class Knight
   end
 end
 
+def output(path)
+  puts "You made it in #{path.length - 1} moves!"
+  p path
+end
+
 knight = Knight.new
-p knight.move([0, 0], [1, 2]) # expected output: [[0,0], [1,2]]
-p knight.move([0, 0], [7, 7]) # => [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
+output(knight.move([0, 0], [1, 2])) # expected output: [[0,0], [1,2]]
+output(knight.move([0, 0], [7, 7])) # => [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
