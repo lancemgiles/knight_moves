@@ -21,7 +21,17 @@ class Knight
     # each element of the row array is a cell in that row
     # so @board[0][0] is the bottom left corner, (0, 0)
     @board = Array.new(8) { Array.new(8) }
+    populate
   end
+
+  def populate
+    (0..7).each do |row|
+      (0..7).each do |col|
+        @board[row][col]
+      end
+    end
+  end
+
 
   # return an array representing coordinates for each stop
   def move(start, target)
