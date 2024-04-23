@@ -32,6 +32,10 @@ class Knight
     end
   end
 
+  def valid_pos?(pos)
+    row, col = pos
+    row >= 0 && row < 8 && col >= 0 && col < 8
+  end
 
   # return an array representing coordinates for each stop
   def move(start, target)
