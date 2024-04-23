@@ -47,13 +47,21 @@ class Knight
     @board[coords[0]][coords[1]]
   end
 
-  def possible_moves(start)
+  def possible_moves(pos)
     # the piece must move two spaces in one axis and one in another axis
     # ex: [3, 3] can move to [1, 2], [4, 1], [2, 1], [5, 2], etc
+    # apply possible moves from given position using knight's general moving ability
+    possibilites = []
+
+    POSSIBLE_MOVES.each do |move|
+      new_row = pos[0] + move[0]
+      new_col = pos[1] + move[1]
+      possibilites << [new_row, new_col] if valid_pos?([new_row, new_col])
+    end
+    possibilites
   end
 end
 
-game = Board.new
 knight = Knight.new
 knight.move([0, 0], [1, 2]) # expected output: [[0,0], [1,2]]
 knight.move([0, 0], [7, 7]) # => [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
