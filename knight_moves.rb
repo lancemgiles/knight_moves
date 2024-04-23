@@ -13,7 +13,7 @@ class Knight
     [-2, -1]
   ].freeze
 
-  attr_accessor :location, :destination, :board
+  attr_accessor :board
 
   def initialize
     # chess board as a cartesean plane
@@ -39,8 +39,24 @@ class Knight
 
   # return an array representing coordinates for each stop
   def move(start, target)
-    @location = locate(start)
-    @destination = locate(target)
+    # modified level-order traversal
+    queue = [[start]]
+    history = []
+
+    until queue.empty?
+      current_path = queue.shift
+      current_pos = current_path.last
+
+      return current_path if current_pos == target
+
+      possible_moves(current_pos).each do |move|
+        next if history.include?(move)
+
+        new_path = current_path + [move]
+        queue << new_path
+        history << move
+      end
+    end
   end
 
   def locate(coords)
@@ -63,5 +79,5 @@ class Knight
 end
 
 knight = Knight.new
-knight.move([0, 0], [1, 2]) # expected output: [[0,0], [1,2]]
-knight.move([0, 0], [7, 7]) # => [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
+p knight.move([0, 0], [1, 2]) # expected output: [[0,0], [1,2]]
+p knight.move([0, 0], [7, 7]) # => [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
